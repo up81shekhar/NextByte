@@ -14,6 +14,7 @@ const SubjectsPage = lazy(() => import("./components/SubjectsPage"));
 const McqPage = lazy(() => import("./components/LandingPage/McqPage"));
 const AboutUs = lazy(() => import("./components/AboutUs"));
 const PrivacyPolicy = lazy(() => import("./components/PrivacyPolicy"));
+const AdminUpload = lazy(() => import('./components/LandingPage/AdminUpload'));
 
 // 3. A quick inline 404 Component (You can move this to its own file later if you want)
 const NotFoundPage = () => (
