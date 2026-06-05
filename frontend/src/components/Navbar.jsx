@@ -7,7 +7,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "BCA", href: "/course/bca" },
   { label: "MCA", href: "/course/mca" }, // Example: defaulting to MCA or a general courses page
-  { label: "BBA", href: "/course/bba" },
+  { label: "All Courses", href: "/courses" },
   { label: "About Us", href: "/about" },
 ];
 

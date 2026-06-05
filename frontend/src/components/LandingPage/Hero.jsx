@@ -1,69 +1,161 @@
-import { useState } from "react";
-import AdBanner from "./AdBanner";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
-    <div className="relative mx-4 md:mx-auto max-w-5xl mt-6 rounded-3xl border border-green-200 bg-white p-6 md:p-8 shadow-sm overflow-hidden">
-      {/* Top gloss line - Added 'relative' to parent and 'overflow-hidden' so this works properly */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-green-400/40 to-transparent" />
+    <section className="relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-white to-emerald-50" />
 
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-        
-        {/* ── LEFT CONTENT (Text & Bullets) ── */}
-        <div className="flex-1 w-full">
-          {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-extrabold leading-tight text-slate-800">
-            Learn, Practice &
-            <br />
-            Crack Exams with
-            <span className="block text-green-600">NextByte</span>
-          </h1>
+      {/* Glow */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-green-200/30 blur-3xl rounded-full" />
 
-          <p className="mt-4 text-slate-600 md:text-lg max-w-lg">
-            MCQs, Notes, Coding Questions and Semester-wise Study Resources for
-            Students.
-          </p>
+      <div className="relative max-w-7xl mx-auto px-6 py-20">
 
-          {/* Bullets */}
-          <ul className="mt-5 space-y-2.5 text-[13px] md:text-sm text-[#5a8a6a] font-medium">
-            <li className="flex items-start gap-2.5">
-              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0 shadow-[0_0_4px_rgba(74,222,128,0.6)]" />
-              Semester-wise Study Resources for Students.
-            </li>
-            <li className="flex items-start gap-2.5">
-              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0 shadow-[0_0_4px_rgba(74,222,128,0.6)]" />
-              <span>
-                MCQs, Notes, Coding Questions and more for comprehensive
-                learning.
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+          {/* LEFT */}
+          <div>
+
+            <span className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+              🚀 India's Learning Platform
+            </span>
+
+            <h1 className="mt-6 text-5xl md:text-6xl font-extrabold leading-tight text-slate-900">
+              Learn Smarter with
+              <span className="block text-green-600">
+                NextByte
               </span>
-            </li>
-          </ul>
-        </div>
+            </h1>
 
-        {/* ── RIGHT CONTENT (Stats Grid) ── */}
-        {/* Shows as 3 columns on mobile, but stacks neatly on the right for desktop to save vertical space */}
-        <div className="w-full md:w-64 flex-shrink-0 mt-2 md:mt-0">
-          <div className="grid grid-cols-3 md:grid-cols-1 gap-3">
-            
-            <div className="bg-green-50/40 border border-green-100 rounded-xl p-3 md:p-4 text-center flex flex-col justify-center">
-              <h3 className="text-xl md:text-2xl font-bold text-green-600">1200+</h3>
-              <p className="text-xs font-medium text-slate-500 mt-1">MCQs</p>
+            <p className="mt-6 text-lg text-slate-600 max-w-xl">
+              Semester-wise Notes, MCQs, Coding Questions,
+              Previous Year Papers and Career Roadmaps
+              for BCA, B.Tech, MCA and more.
+            </p>
+
+           
+
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-4 mt-8">
+
+              <Link
+                to="/courses"
+                className="
+                  bg-green-600
+                  hover:bg-green-700
+                  text-white
+                  px-7
+                  py-3.5
+                  rounded-xl
+                  font-semibold
+                "
+              >
+                Explore Courses
+              </Link>
+
+              <Link
+                to="/mcqs"
+                className="
+                  border
+                  border-slate-300
+                  hover:border-green-500
+                  px-7
+                  py-3.5
+                  rounded-xl
+                  font-semibold
+                "
+              >
+                Practice MCQs
+              </Link>
+
             </div>
 
-            <div className="bg-green-50/40 border border-green-100 rounded-xl p-3 md:p-4 text-center flex flex-col justify-center">
-              <h3 className="text-xl md:text-2xl font-bold text-green-600">50+</h3>
-              <p className="text-xs font-medium text-slate-500 mt-1">Subjects</p>
-            </div>
+            {/* Trust */}
+            <div className="flex items-center gap-8 mt-10">
 
-            <div className="bg-green-50/40 border border-green-100 rounded-xl p-3 md:p-4 text-center flex flex-col justify-center">
-              <h3 className="text-xl md:text-2xl font-bold text-green-600">100+</h3>
-              <p className="text-xs font-medium text-slate-500 mt-1">Notes</p>
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900">
+                  5K+
+                </h3>
+                <p className="text-sm text-slate-500">
+                  Students
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900">
+                  1200+
+                </h3>
+                <p className="text-sm text-slate-500">
+                  MCQs
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900">
+                  50+
+                </h3>
+                <p className="text-sm text-slate-500">
+                  Subjects
+                </p>
+              </div>
+
             </div>
 
           </div>
+
+          {/* RIGHT */}
+          <div>
+
+            <div className="grid grid-cols-2 gap-5">
+
+              <div className="bg-white rounded-3xl p-6 shadow-lg border border-green-100">
+                <div className="text-4xl">📚</div>
+                <h3 className="mt-4 font-bold text-xl">
+                  Notes
+                </h3>
+                <p className="text-slate-500 mt-2">
+                  Easy-to-understand study material.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-3xl p-6 shadow-lg border border-green-100">
+                <div className="text-4xl">🧠</div>
+                <h3 className="mt-4 font-bold text-xl">
+                  MCQs
+                </h3>
+                <p className="text-slate-500 mt-2">
+                  Topic-wise practice questions.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-3xl p-6 shadow-lg border border-green-100">
+                <div className="text-4xl">💻</div>
+                <h3 className="mt-4 font-bold text-xl">
+                  Coding
+                </h3>
+                <p className="text-slate-500 mt-2">
+                  Programming practice & projects.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-3xl p-6 shadow-lg border border-green-100">
+                <div className="text-4xl">🚀</div>
+                <h3 className="mt-4 font-bold text-xl">
+                  Roadmaps
+                </h3>
+                <p className="text-slate-500 mt-2">
+                  Career guidance & placement prep.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
-        
       </div>
-    </div>
+    </section>
   );
 }
+

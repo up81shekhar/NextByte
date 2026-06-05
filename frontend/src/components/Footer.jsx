@@ -136,7 +136,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-xl font-bold text-slate-800">
-              Stay Updated 🚀
+              Stay Updated 
             </h3>
 
             <p className="text-slate-600 mt-2">
