@@ -53,7 +53,7 @@ export default function Hero() {
                 Explore Courses
               </Link>
 
-              <Link
+              {/* <Link
                 to="/mcqs"
                 className="
                   border
@@ -66,7 +66,7 @@ export default function Hero() {
                 "
               >
                 Practice MCQs
-              </Link>
+              </Link> */}
 
             </div>
 

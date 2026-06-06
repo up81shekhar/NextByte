@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { API_BASE_URL } from '../Config';
+import AdBanner from "./AdBanner";
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState([]);
@@ -116,7 +117,7 @@ export default function CoursesPage() {
           </div>
         </div>
       </section>
-
+      <AdBanner />
       {/* Courses */}
       <section className="max-w-7xl mx-auto px-6 pb-20">
         <h2 className="text-3xl font-bold text-slate-900 mb-8">
@@ -208,6 +209,7 @@ export default function CoursesPage() {
           </div>
         )}
       </section>
+      <AdBanner />
     </div>
   );
 }

@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom"; // 1. Import Link
+import AdBanner from "./AdBanner";
 
 const Courses = ({ name, fullName, icon, semesters, subjects, mcqs, link }) => {
   return (
     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 mt-2 bg-white border border-slate-200 rounded-3xl p-5 hover:border-green-400 hover:shadow-xl transition-all duration-300 cursor-pointer">
-      
+      {/* <AdBanner /> */}
       {/* 1. Brand Section */}
       <div className="flex items-center gap-4 ">
         <div className="text-4xl md:text-5xl shrink-0">{icon}</div>
@@ -17,7 +18,6 @@ const Courses = ({ name, fullName, icon, semesters, subjects, mcqs, link }) => {
           </p>
         </div>
       </div>
-
       {/* 2. Stats Section */}
       <div className="flex items-center justify-between md:justify-center gap-4 md:gap-8 px-0 md:px-6 py-3 md:py-0 border-y md:border-y-0 md:border-x border-slate-100">
         <StatItem label="Semesters" value={semesters} color="text-red-500" />
@@ -33,6 +33,7 @@ const Courses = ({ name, fullName, icon, semesters, subjects, mcqs, link }) => {
         Start Learning
       </Link>
     </div>
+
   );
 };
 

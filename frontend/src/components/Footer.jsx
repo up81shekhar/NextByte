@@ -1,3 +1,5 @@
+import AdBanner from "./LandingPage/AdBanner";
+
 export default function Footer() {
   return (
     <footer className="bg-white border-t border-green-100">
@@ -134,7 +136,7 @@ export default function Footer() {
 
         <div className="mt-14 bg-green-50 border border-green-100 rounded-3xl p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
 
-          <div>
+          {/* <div>
             <h3 className="text-xl font-bold text-slate-800">
               Stay Updated 
             </h3>
@@ -142,9 +144,11 @@ export default function Footer() {
             <p className="text-slate-600 mt-2">
               Get placement updates, roadmaps and learning tips.
             </p>
-          </div>
+          </div> */}
+          <AdBanner />
+          <AdBanner />
 
-          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+          {/* <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
             <input
               type="email"
               placeholder="Enter your email"
@@ -172,7 +176,7 @@ export default function Footer() {
             >
               Subscribe
             </button>
-          </div>
+          </div> */}
 
         </div>
 

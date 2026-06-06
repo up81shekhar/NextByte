@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { API_BASE_URL } from './Config';
+import AdBanner from "./LandingPage/AdBanner";
 
 export default function SubjectsPage() {
   const { courseName } = useParams();
@@ -33,11 +34,11 @@ export default function SubjectsPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
+        <AdBanner />
       <h1 className="text-3xl font-bold uppercase text-gray-800">
         {courseName} Subjects
       </h1>
       <p className="text-gray-500 mt-2">Choose a subject to start practicing mock MCQs.</p>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
         {subjectsList.map((subject) => (
           <div key={subject._id} className="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm flex justify-between items-center">
@@ -45,6 +46,7 @@ export default function SubjectsPage() {
               <span className="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">
                 Semester {subject.semester}
               </span>
+    
               <h3 className="text-lg font-bold text-slate-800 mt-2">{subject.name}</h3>
             </div>
             <Link
@@ -55,6 +57,7 @@ export default function SubjectsPage() {
             </Link>
           </div>
         ))}
+      <AdBanner />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Hero from "./Hero";
 import CoursesPage from "./CoursesPage";
 import { API_BASE_URL } from '../Config';
+import AdBanner from "./AdBanner";
 
 
 export default function LandingPage() {
@@ -145,7 +146,7 @@ export default function LandingPage() {
           </Link>
         </div>
       </div>
-
+      <AdBanner />
           <section className="bg-white py-20">
   <div className="max-w-7xl mx-auto px-6">
 
@@ -190,6 +191,7 @@ export default function LandingPage() {
     </div>
   </div>
 </section>
+<AdBanner />
 
 <section className="py-20 bg-green-50">
   <div className="max-w-7xl mx-auto px-6">
@@ -233,7 +235,7 @@ export default function LandingPage() {
     </div>
   </div>
 </section>
-
+<AdBanner />
     </div>
   );
 }
