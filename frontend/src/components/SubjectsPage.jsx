@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { API_BASE_URL } from '../Config';
+import { API_BASE_URL } from './Config';
 
 export default function SubjectsPage() {
   const { courseName } = useParams();
