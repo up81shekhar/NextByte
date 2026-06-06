@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API_BASE_URL } from './Config';
 
-
 export default function AdminUpload() {
   const [subjects, setSubjects] = useState([]);
   const [formData, setFormData] = useState({
