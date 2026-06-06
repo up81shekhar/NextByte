@@ -6,9 +6,9 @@ import { Link, useLocation } from "react-router-dom"; // 1. Import Link and useL
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "BCA", href: "/course/bca" },
-  { label: "MCA", href: "/course/mca" }, // Example: defaulting to MCA or a general courses page
   { label: "All Courses", href: "/courses" },
   { label: "About Us", href: "/about" },
+  { label: "Admin", href: "/admin/dashboard" }, // Example: defaulting to MCA or a general courses page
 ];
 
 export default function Navbar() {
