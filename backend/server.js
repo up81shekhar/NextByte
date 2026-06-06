@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import apiRoutes from './routes/api.js';
 import adminRoutes from './routes/admin.js';
 import { SitemapStream, streamToPromise } from 'sitemap';
+import QuestionModel from './models/Question.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -61,10 +62,6 @@ app.get('/sitemap.xml', async (req, res) => {
   }
 });
 
-// ── ROUTE ──
-app.get('/', (req, res) => {
-  res.send('NextByte Backend Server is running successfully!');
-});
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port http://localhost:${PORT}`);
