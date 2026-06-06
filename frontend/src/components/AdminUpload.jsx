@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../Config';
+
 
 export default function AdminUpload() {
   const [subjects, setSubjects] = useState([]);
@@ -21,7 +23,7 @@ export default function AdminUpload() {
     const fetchAllSubjects = async () => {
       try {
         // We fetch BCA subjects for testing; you can scale this to handle multiple courses easily
-        const response = await fetch('http://localhost:5000/api/courses/bca/subjects');
+        const response = await fetch(`${API_BASE_URL}/api/courses/bca/subjects`);
         if (response.ok) {
           const data = await response.json();
           setSubjects(data);
@@ -53,7 +55,7 @@ export default function AdminUpload() {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/questions', {
+      const response = await fetch(`${API_BASE_URL}/api/questions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

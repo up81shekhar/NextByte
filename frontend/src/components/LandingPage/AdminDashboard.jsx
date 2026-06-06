@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../Config';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function AdminDashboard() {
 
   const loadInitialData = async () => {
     try {
-      const cRes = await fetch('http://localhost:5000/api/courses');
+      const cRes = await fetch(`${API_BASE_URL}/api/courses`);
       if (cRes.ok) {
         const cData = await cRes.json();
         setCourses(cData || []);
@@ -54,7 +55,7 @@ export default function AdminDashboard() {
 
   const fetchSubjectsForQuestions = async (courseName) => {
     try {
-      const sRes = await fetch(`http://localhost:5000/api/courses/${courseName}/subjects`);
+      const sRes = await fetch(`http://192.168.29.115:5000/api/courses/${courseName}/subjects`);
       if (sRes.ok) {
         const sData = await sRes.json();
         setSubjects(sData || []);
@@ -70,7 +71,7 @@ export default function AdminDashboard() {
   const fetchQuestionsList = async (subId) => {
     const savedToken = localStorage.getItem('nextbyte_admin_token');
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/questions/${subId}`, {
+      const res = await fetch(`http://192.168.29.115:5000/api/admin/questions/${subId}`, {
         headers: { 'Authorization': `Bearer ${savedToken}` }
       });
       if (res.ok) setSubjectQuestions(await res.json());
@@ -91,7 +92,7 @@ export default function AdminDashboard() {
   const handleAddCourse = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/admin/courses', {
+      const res = await fetch('http://192.168.29.115:5000/api/admin/courses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(courseForm)
@@ -107,7 +108,7 @@ export default function AdminDashboard() {
   const handleDeleteCourse = async (id) => {
     if (!window.confirm("⚠️ WARNING: Deletes course AND ALL nested data. Proceed?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/courses/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+      const res = await fetch(`http://192.168.29.115:5000/api/admin/courses/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
       if (res.ok) { showStatus('success', '🗑️ Course wiped clean.'); loadInitialData(); }
     } catch (err) { showStatus('error', 'Deletion aborted.'); }
   };
@@ -115,7 +116,7 @@ export default function AdminDashboard() {
   const handleAddSubject = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/admin/subjects', {
+      const res = await fetch('http://192.168.29.115:5000/api/admin/subjects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(subjectForm)
@@ -132,7 +133,7 @@ export default function AdminDashboard() {
   const handleDeleteSubject = async (id) => {
     if (!window.confirm("Delete this subject and its questions?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/subjects/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+      const res = await fetch(`http://192.168.29.115:5000/api/admin/subjects/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
       if (res.ok) { showStatus('success', '🗑️ Subject removed.'); loadInitialData(); }
     } catch (err) { showStatus('error', 'Network issue.'); }
   };
@@ -156,7 +157,7 @@ export default function AdminDashboard() {
       explanation: qForm.explanation
     };
 
-    const url = editingQId ? `http://localhost:5000/api/admin/questions/${editingQId}` : 'http://localhost:5000/api/admin/questions';
+    const url = editingQId ? `http://192.168.29.115:5000/api/admin/questions/${editingQId}` : 'http://192.168.29.115:5000/api/admin/questions';
     const method = editingQId ? 'PUT' : 'POST';
 
     try {
@@ -176,7 +177,7 @@ export default function AdminDashboard() {
   const handleDeleteQuestion = async (id) => {
     if (!window.confirm("Delete this question permanently?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/questions/${id}`, {
+      const res = await fetch(`http://192.168.29.115:5000/api/admin/questions/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -217,7 +218,7 @@ export default function AdminDashboard() {
     formData.append('pdfFile', pdfFile);
 
     try {
-      const res = await fetch('http://localhost:5000/api/admin/generate-pdf', {
+      const res = await fetch('http://192.168.29.115:5000/api/admin/generate-pdf', {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }, 
         body: formData 
@@ -244,7 +245,7 @@ export default function AdminDashboard() {
     
     setIsGenerating(true);
     try {
-      const res = await fetch('http://localhost:5000/api/admin/generate-url', {
+      const res = await fetch('http://192.168.29.115:5000/api/admin/generate-url', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json', // Yeh URL ke liye sahi hai
@@ -274,7 +275,7 @@ export default function AdminDashboard() {
     const finalPayload = generatedMCQs.map(q => ({ ...q, subjectId: targetSubjectId }));
 
     try {
-      const res = await fetch('http://localhost:5000/api/admin/questions/bulk', {
+      const res = await fetch('http://192.168.29.115:5000/api/admin/questions/bulk', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ questions: finalPayload })

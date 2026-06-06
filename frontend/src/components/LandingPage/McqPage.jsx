@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import AdBanner from './AdBanner';
+import { API_BASE_URL } from '../Config';
+
 
 export default function McqPage() {
   const { courseName, subjectName } = useParams(); // subjectName acts as the slug here
@@ -20,7 +22,7 @@ export default function McqPage() {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:5000/api/subjects/${subjectName}/questions?page=${currentPage}&limit=${questionsPerPage}`
+          `${API_BASE_URL}/api/subjects/${subjectName}/questions?page=${currentPage}&limit=${questionsPerPage}`
         );
         if (!response.ok) {
           throw new Error('Failed to load quiz sets.');

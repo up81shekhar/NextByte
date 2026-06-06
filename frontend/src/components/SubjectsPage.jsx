@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { API_BASE_URL } from '../Config';
 
 export default function SubjectsPage() {
   const { courseName } = useParams();
@@ -11,7 +12,7 @@ export default function SubjectsPage() {
     const fetchSubjects = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:5000/api/courses/${courseName}/subjects`);
+        const response = await fetch(`${API_BASE_URL}/api/courses/${courseName}/subjects`);
         if (!response.ok) {
           throw new Error('No academic structures found for this track.');
         }
