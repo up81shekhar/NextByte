@@ -13,7 +13,11 @@ const PORT = process.env.PORT || 8080;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // ── MIDDLEWARE ──
-app.use(cors());
+app.use(cors({
+  origin: '*', // Sab allow kar do
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}));
 app.use(express.json());
 app.use('/api', apiRoutes);
 app.use('/api/admin', adminRoutes);
