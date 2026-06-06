@@ -13,20 +13,12 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const MONGODB_URI = process.env.MONGODB_URI;
 
-// ── MIDDLEWARE ──
 app.use(cors({
-  origin: '*', 
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+  origin: '*', // Yahan '*' hi hona chahiye, '/*' nahi
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Private Network Access & CORS Headers Fix
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   res.header("Access-Control-Allow-Private-Network", "true");
-//   next();
-// });
 
 app.use(express.json());
 app.use('/api', apiRoutes);

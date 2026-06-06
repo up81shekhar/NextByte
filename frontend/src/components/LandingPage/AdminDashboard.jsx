@@ -23,7 +23,7 @@ export default function AdminDashboard() {
 
   // ── PDF & URL AUTO-GEN STATES ──
   const [pdfFile, setPdfFile] = useState(null);
-  const [webUrl, setWebUrl] = useState(''); // NEW: State for URL input
+  const [webUrl, setWebUrl] = useState('');
   const [targetSubjectId, setTargetSubjectId] = useState('');
   const [generatedMCQs, setGeneratedMCQs] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -55,7 +55,7 @@ export default function AdminDashboard() {
 
   const fetchSubjectsForQuestions = async (courseName) => {
     try {
-      const sRes = await fetch(`http://192.168.29.115:5000/api/courses/${courseName}/subjects`);
+      const sRes = await fetch(`${API_BASE_URL}/api/courses/${courseName}/subjects`);
       if (sRes.ok) {
         const sData = await sRes.json();
         setSubjects(sData || []);
@@ -71,7 +71,7 @@ export default function AdminDashboard() {
   const fetchQuestionsList = async (subId) => {
     const savedToken = localStorage.getItem('nextbyte_admin_token');
     try {
-      const res = await fetch(`http://192.168.29.115:5000/api/admin/questions/${subId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/questions/${subId}`, {
         headers: { 'Authorization': `Bearer ${savedToken}` }
       });
       if (res.ok) setSubjectQuestions(await res.json());
@@ -92,7 +92,7 @@ export default function AdminDashboard() {
   const handleAddCourse = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://192.168.29.115:5000/api/admin/courses', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/courses`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(courseForm)
@@ -108,7 +108,7 @@ export default function AdminDashboard() {
   const handleDeleteCourse = async (id) => {
     if (!window.confirm("⚠️ WARNING: Deletes course AND ALL nested data. Proceed?")) return;
     try {
-      const res = await fetch(`http://192.168.29.115:5000/api/admin/courses/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+      const res = await fetch(`${API_BASE_URL}/api/admin/courses/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
       if (res.ok) { showStatus('success', '🗑️ Course wiped clean.'); loadInitialData(); }
     } catch (err) { showStatus('error', 'Deletion aborted.'); }
   };
@@ -116,7 +116,7 @@ export default function AdminDashboard() {
   const handleAddSubject = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://192.168.29.115:5000/api/admin/subjects', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/subjects`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(subjectForm)
@@ -133,7 +133,7 @@ export default function AdminDashboard() {
   const handleDeleteSubject = async (id) => {
     if (!window.confirm("Delete this subject and its questions?")) return;
     try {
-      const res = await fetch(`http://192.168.29.115:5000/api/admin/subjects/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+      const res = await fetch(`${API_BASE_URL}/api/admin/subjects/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
       if (res.ok) { showStatus('success', '🗑️ Subject removed.'); loadInitialData(); }
     } catch (err) { showStatus('error', 'Network issue.'); }
   };
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
       explanation: qForm.explanation
     };
 
-    const url = editingQId ? `http://192.168.29.115:5000/api/admin/questions/${editingQId}` : 'http://192.168.29.115:5000/api/admin/questions';
+    const url = editingQId ? `${API_BASE_URL}/api/admin/questions/${editingQId}` : `${API_BASE_URL}/api/admin/questions`;
     const method = editingQId ? 'PUT' : 'POST';
 
     try {
@@ -177,7 +177,7 @@ export default function AdminDashboard() {
   const handleDeleteQuestion = async (id) => {
     if (!window.confirm("Delete this question permanently?")) return;
     try {
-      const res = await fetch(`http://192.168.29.115:5000/api/admin/questions/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/questions/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -218,7 +218,7 @@ export default function AdminDashboard() {
     formData.append('pdfFile', pdfFile);
 
     try {
-      const res = await fetch('http://192.168.29.115:5000/api/admin/generate-pdf', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/generate-pdf`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }, 
         body: formData 
@@ -237,26 +237,23 @@ export default function AdminDashboard() {
     }
   };
 
-  // NEW: Handler for fetching from URL
-  // ── FIX: URL FETCH HANDLER ──
   const handleUrlFetch = async (e) => {
     e.preventDefault();
     if (!webUrl || !targetSubjectId) return showStatus('error', 'Please select a subject and enter a URL.');
     
     setIsGenerating(true);
     try {
-      const res = await fetch('http://192.168.29.115:5000/api/admin/generate-url', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/generate-url`, {
         method: 'POST',
         headers: { 
-          'Content-Type': 'application/json', // Yeh URL ke liye sahi hai
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` 
         }, 
         body: JSON.stringify({ url: webUrl }) 
       });
 
-      // Agar error hai toh status read karo
       if (!res.ok) {
-        const errData = await res.text(); // Error text read karo
+        const errData = await res.text();
         throw new Error(errData);
       }
 
@@ -275,7 +272,7 @@ export default function AdminDashboard() {
     const finalPayload = generatedMCQs.map(q => ({ ...q, subjectId: targetSubjectId }));
 
     try {
-      const res = await fetch('http://192.168.29.115:5000/api/admin/questions/bulk', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/questions/bulk`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ questions: finalPayload })
@@ -284,7 +281,7 @@ export default function AdminDashboard() {
         showStatus('success', '🚀 All AI questions saved to database!');
         setGeneratedMCQs([]); 
         setPdfFile(null); 
-        setWebUrl(''); // Reset URL state
+        setWebUrl(''); 
         fetchQuestionsList(targetSubjectId); 
       }
     } catch (err) {
@@ -292,10 +289,9 @@ export default function AdminDashboard() {
     }
   };
 
-  // Helper to change tabs and clear pending generated items
   const switchTab = (tabId) => {
     setActiveTab(tabId);
-    setGeneratedMCQs([]); // Clear out any unsaved AI generated questions
+    setGeneratedMCQs([]); 
   };
 
   return (
@@ -326,7 +322,7 @@ export default function AdminDashboard() {
             { id: 'subjects', label: '📚 Subjects' },
             { id: 'questions', label: '✍️ Manage MCQs' },
             { id: 'pdf-gen', label: '📄 PDF Auto-Gen' },
-            { id: 'url-gen', label: '🌐 URL Auto-Gen' } // NEW TAB ADDED
+            { id: 'url-gen', label: '🌐 URL Auto-Gen' } 
           ].map(tab => (
             <button key={tab.id} onClick={() => switchTab(tab.id)} className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-150 ${activeTab === tab.id ? 'bg-green-100 text-green-800 shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
               {tab.label}
@@ -403,7 +399,6 @@ export default function AdminDashboard() {
           {/* TAB 3: MANAGE QUESTIONS */}
           {activeTab === 'questions' && (
             <div className="space-y-8 animate-fadeIn">
-              {/* Question logic unchanged, omitted for brevity but standard from your code */}
               <form onSubmit={handleAddOrUpdateQuestion} className={`border p-6 rounded-2xl shadow-sm space-y-4 transition-colors ${editingQId ? 'bg-amber-50/50 border-amber-200' : 'bg-white border-slate-200'}`}>
                 <div className="flex justify-between items-center">
                   <h3 className={`text-lg font-bold ${editingQId ? 'text-amber-800' : 'text-slate-800'}`}>
@@ -511,7 +506,7 @@ export default function AdminDashboard() {
             </div>
           )}
 
-          {/* NEW TAB 5: URL AUTO GENERATOR */}
+          {/* TAB 5: URL AUTO GENERATOR */}
           {activeTab === 'url-gen' && (
             <div className="space-y-6 animate-fadeIn">
               <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
@@ -541,7 +536,6 @@ export default function AdminDashboard() {
           )}
 
           {/* ── SHARED PREVIEW SECTION FOR BOTH PDF AND URL TABS ── */}
-          {/* By placing this outside the strict activeTab blocks but inside the flex-1 container, or rendering it conditionally based on state, we prevent duplication! */}
           {generatedMCQs.length > 0 && (activeTab === 'pdf-gen' || activeTab === 'url-gen') && (
             <div className="bg-white border border-indigo-200 p-6 rounded-2xl shadow-sm mt-6 animate-fadeIn">
               <div className="flex justify-between items-center mb-4">
