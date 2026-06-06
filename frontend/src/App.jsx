@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
 // Standard Imports 
+import QuestionDetail from './components/Pages/QuestionDetail';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./ScrollToTop";
@@ -69,7 +70,7 @@ const App = () => {
             <Route path="/course/:courseName/:subjectName" element={<McqPage />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-
+            <Route path="/question/:id" element={<QuestionDetail />} />
             {/* Wildcard Route */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

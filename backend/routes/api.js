@@ -102,4 +102,28 @@ router.post('/questions', async (req, res) => {
   }
 });
 
+// ── GET SINGLE QUESTION BY ID (SEO Pages ke liye) ──
+router.get('/questions/:id', async (req, res) => {
+  try {
+    // 1. URL se ID nikalna
+    const questionId = req.params.id;
+
+    // 2. Database mein us specific ID ko dhoondhna
+    const question = await QuestionModel.findById(questionId);
+
+    // 3. Agar question nahi mila toh 404 (Not Found) return karna
+    if (!question) {
+      return res.status(404).json({ message: "Question not found" });
+    }
+
+    // 4. Agar mil gaya toh JSON format mein frontend ko bhej dena
+    res.status(200).json(question);
+    
+  } catch (error) {
+    // Agar galti se galat format ki ID aa jaye toh server crash hone se bachana
+    console.error("Error fetching single question:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 export default router;
