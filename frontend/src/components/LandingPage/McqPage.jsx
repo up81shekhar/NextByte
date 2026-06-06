@@ -85,7 +85,7 @@ export default function McqPage() {
           questions.map((q, index) => (
             <React.Fragment key={q._id}>
               <McqCard number={indexOfFirstQ + index + 1} qData={q} />
-              {(index + 1) % 3 === 0 && <AdBanner format="rectangle" />}
+              {(index + 1) % 3 === 0 && <AdBanner format="horizontal" />}
             </React.Fragment>
           ))
         ) : (

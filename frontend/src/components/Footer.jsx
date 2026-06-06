@@ -132,54 +132,6 @@ export default function Footer() {
 
         </div>
 
-        {/* Newsletter */}
-
-        <div className="mt-14 bg-green-50 border border-green-100 rounded-3xl p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
-
-          {/* <div>
-            <h3 className="text-xl font-bold text-slate-800">
-              Stay Updated 
-            </h3>
-
-            <p className="text-slate-600 mt-2">
-              Get placement updates, roadmaps and learning tips.
-            </p>
-          </div> */}
-          <AdBanner />
-          <AdBanner />
-
-          {/* <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="
-                px-4 py-3
-                rounded-xl
-                border border-green-200
-                outline-none
-                focus:ring-2
-                focus:ring-green-500
-                min-w-[280px]
-              "
-            />
-
-            <button
-              className="
-                px-6 py-3
-                rounded-xl
-                bg-green-600
-                hover:bg-green-700
-                text-white
-                font-semibold
-                transition
-              "
-            >
-              Subscribe
-            </button>
-          </div> */}
-
-        </div>
-
         {/* Bottom */}
 
         <div className="mt-12 pt-6 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
