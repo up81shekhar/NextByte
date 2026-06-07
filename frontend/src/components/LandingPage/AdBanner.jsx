@@ -43,7 +43,7 @@ export default function AdBanner({ format = "horizontal" }) {
     <div
       className={`w-full flex justify-center mx-auto my-6 ${isHorizontal ? "max-w-[728px]" : "max-w-[336px]"}`}
     >
-      <iframe
+      {/* <iframe
         title={`ad-${format}`}
         srcDoc={adHTML}
         width={adWidth}
@@ -51,7 +51,7 @@ export default function AdBanner({ format = "horizontal" }) {
         frameBorder="0"
         scrolling="no"
         className="bg-slate-50 border border-dashed border-slate-300 rounded"
-      ></iframe>
+      ></iframe> */}
     </div>
   );
 }
