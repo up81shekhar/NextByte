@@ -50,7 +50,8 @@ export default function QuestionDetail() {
       
       {/* 🚀 1. SEO META TAGS (PROGRAMMATIC SEO) 🚀 */}
       <Helmet>
-        <title>{question.questionText} - NextByte MCQs</title>
+        <title>{question?.questionText ? `${question.questionText.substring(0, 60)}... - NextByte` : 'NextByte MCQs'}</title>
+          
         <meta name="description" content={seoDescription} />
       </Helmet>
 
@@ -70,7 +71,7 @@ export default function QuestionDetail() {
         </h1>
 
         <div className="space-y-3 mb-8">
-          {question.options.map((opt, index) => (
+          {question.options?.map((opt, index) => (
             <div 
               key={index} 
               className={`p-4 border rounded-xl text-sm md:text-base transition-all ${
